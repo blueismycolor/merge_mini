@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+         #
+#    By: egatien <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/09 12:23:07 by aeudes            #+#    #+#              #
-#    Updated: 2025/03/06 10:39:41 by aeudes           ###   ########.fr        #
+#    Updated: 2025/05/22 22:10:04 by egatien          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ all : ${NAME}
 RM = rm -f
 
 ${NAME} : ${LIB_PRINTF} ${LIB_LIBFT}
-	ar -v rcs ${NAME} ft_printf/*.o libft/*.o
+	ar rcv ${NAME} ft_printf/*.o libft/*.o
 
 ${LIB_PRINTF} :
 	${MAKE} -C $$(dirname $@)

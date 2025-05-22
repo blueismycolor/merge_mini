@@ -123,12 +123,10 @@ int	parsing_env_var(char *str, char *result, int tmp)
 
 char	*get_special_env_value(char *str, int index, char **envp)
 {
-	int		i;
 	int		count;
 	int		tmp;
 	char	*result;
 
-	i = 0;
 	count = 0;
 	tmp = index;
 	if (ft_isdigit(str[tmp + 1]))
@@ -150,11 +148,9 @@ char	*get_special_env_value(char *str, int index, char **envp)
 
 char	*get_env_name(char *str, int index, char **envp)
 {
-	int		nbr;
 	char	*result;
 
 	index++;
-	nbr = 0;
 	if (ft_isdigit(str[index]))
 	{
 		return (NULL);
