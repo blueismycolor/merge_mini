@@ -2,6 +2,17 @@
 
 #include "minishell.h"
 
+int	pass_single_quotes(char *str, int i)
+{
+	if (str[i] == '\'')
+	{
+		i++;
+		while (str[i] != '\'')
+			i++;
+		return (i);
+	}
+	return (i);
+}
 static int	pass_quote_to_remove(char *str, int i)
 {
 	while (str[i] == '\'' || str[i] == '"')
@@ -29,6 +40,11 @@ char	*ft_remove_quotes(char *str)
 	while (str[i] != '\0')
 	{
 		i = pass_quote_to_remove(str, i);
+		if (str[i] == '\0')
+		{
+			result[count] = '\0';
+			return (result);
+		}
 		result[count] = str[i];
 		i++;
 		count++;

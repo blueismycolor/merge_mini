@@ -11,7 +11,9 @@ SRCS		= create_list_tcmd.c \
 			get_token_utils.c \
 			parsing0_0.c \
 			parsing0_1.c \
-			token_utils.c 
+			token_utils.c \
+			free_struct.c \
+			expansion_utils.c
 
 LIBFT_DIR	= libft-complete
 LIBFT		= $(LIBFT_DIR)/libft-complete.a

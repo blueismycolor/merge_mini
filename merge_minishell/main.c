@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egatien <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/22 22:36:48 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/23 13:13:55 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,22 @@ static void	print_tokens(t_cmd *input)
 			printf("[%s]", input->args[i]);
 			i++;
 		}
-		printf(", Type: %d, Quote: %d",input->type, input->quote);
+		// printf(", Type: %d, Quote: %d",input->type, input->quote);
 		if (input->has_redir == true)
 			printf(" | name of file : [%s], redirection type : %d", input->redir->filename, input->redir->type);
 		printf("\n");
 		input = input->next;
 	}
 }
-int	main(void)
+
+int	main(int argc, char **argv, char **env)
 {
 	char		*input;
 	t_token		*arg_tokens;
 	t_cmd		*result;
 
+	if (!argc || !argv)
+		return (1);
 	while (1)
 	{
 		
@@ -119,9 +122,10 @@ int	main(void)
 			process_input(input);
 		}
 		arg_tokens = get_token(input);
-		result = create_list_tcmd(arg_tokens);
+		result = create_list_tcmd(arg_tokens, env);
 		free_list(arg_tokens);
 		print_tokens(result);
+		free_tcmd(result);
 		free(input);
 	}
 	return (0);

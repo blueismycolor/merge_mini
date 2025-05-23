@@ -80,7 +80,7 @@ char	**ft_getargs(char *str, char **result)
 	return (result);
 }
 
-char	**set_args(char *str)
+char	**set_args(char *str, char **envp)
 {
 	char	**result;
 	int		count;
@@ -92,6 +92,7 @@ char	**set_args(char *str)
 	result = ft_getargs(str, result);
 	while (result[i])
 	{
+		result[i] = set_env(result[i], envp);
 		result[i] = ft_remove_quotes(result[i]);
 		i++;
 	}

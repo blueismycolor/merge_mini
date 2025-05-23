@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:57:55 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/22 14:49:32 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/23 10:43:02 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,6 @@ t_quote	get_quote_type(char *str)
 		i++;
 	}
 	return (NONE);
-}
-
-void	free_list(t_token *head)
-{
-	t_token	*temp;
-
-	while (head)
-	{
-		temp = head;
-		head = head->next;
-		free(temp->str);
-		free(temp);
-	}
 }
 
 bool	check_for_expansion(char *str)
