@@ -6,7 +6,7 @@
 /*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/23 13:13:55 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/23 15:16:47 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	print_tokens(t_cmd *input)
 		printf("Token: ");
 		while (input->args[i])
 		{
-			printf("[%s]", input->args[i]);
+			printf("\033[32m[\033[0m%s\033[32m]\033[0m", input->args[i]);
 			i++;
 		}
 		// printf(", Type: %d, Quote: %d",input->type, input->quote);
@@ -119,7 +119,8 @@ int	main(int argc, char **argv, char **env)
 		input = readline("\033[1;92m╰─➤ \033[0m");
 		if (input && input[0] != '\0')
 		{
-			process_input(input);
+			if (!process_input(input))
+				continue;
 		}
 		arg_tokens = get_token(input);
 		result = create_list_tcmd(arg_tokens, env);
