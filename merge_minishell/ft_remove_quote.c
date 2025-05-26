@@ -43,6 +43,7 @@ char	*ft_remove_quotes(char *str)
 		if (str[i] == '\0')
 		{
 			result[count] = '\0';
+			free(str);
 			return (result);
 		}
 		result[count] = str[i];

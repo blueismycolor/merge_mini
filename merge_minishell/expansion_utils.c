@@ -6,7 +6,7 @@
 /*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:12:17 by egatien           #+#    #+#             */
-/*   Updated: 2025/05/23 13:32:47 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/26 14:16:43 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,23 @@ char	*set_env(char *str, char **envp)
 {
 	int		i;
 	char	*result;
+	bool	quotes;
 
 	i = 0;
+	quotes = false;
 	result = ft_strdup(str);
 	free(str);
 	while (result[i] != '\0' && result[i] != '$')
 	{
-		i = pass_single_quotes(result, i);
+		if (result[i] == '"')
+		{
+			if (quotes == false)
+				quotes = true;
+			else
+				quotes = false;
+		}
+		if (quotes == false)
+			i = pass_single_quotes(result, i);
 		i++;
 	}
 	if (result[i] == '\0')

@@ -6,7 +6,10 @@ int	pass_quotes(int i, char *str)
 {
 	if (str[i] == '"')
 	{
+		// printf("character avant le quotes : %c\n", str[i - 1]);
 		i++;
+		if (str[i] == '\0')
+			return (i);
 		while (str[i] != '"')
 			i++;
 		return (i);

@@ -28,6 +28,8 @@ int	count_args(char *str)
 				i++;
 		}
 		i = pass_quotes(i, str);
+		if (str[i] == '\0')
+			break;
 		i++;
 	}
 	count++;
