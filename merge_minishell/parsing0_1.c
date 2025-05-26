@@ -6,7 +6,7 @@
 /*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:43:27 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/22 17:56:24 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/26 14:33:01 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	validate_input(char *input)
 {
 	if (!check_pipe_syntax(input, 0))
 		return false;
-	if (!check_quote_syntax(input, 0))
+	if (check_quote_syntax(input, 0) == ERROR)
 		return false;
 	if (!check_redirection_syntax(input, 0, 0))
 		return false;

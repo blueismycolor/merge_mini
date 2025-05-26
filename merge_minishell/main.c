@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/23 15:16:47 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/26 14:39:16 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int argc, char **argv, char **env)
 		input = readline("\033[1;92m╰─➤ \033[0m");
 		if (input && input[0] != '\0')
 		{
-			if (!process_input(input))
+			if (process_input(input) == ERROR)
 				continue;
 		}
 		arg_tokens = get_token(input);
