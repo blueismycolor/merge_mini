@@ -6,7 +6,7 @@
 /*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:43:27 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/26 14:33:01 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/26 16:01:59 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ bool	check_pipe_syntax(char *input, int i)
 	char	quote;
 
 	quote = 0;
-	if (input[0] == '|')
+	i = skip_space(input, 0);
+	if (input[i] == '|')
 		return (ft_putstr_fd(ERR_SYN, STDERR_FILENO), false);
 	while (input[i])
 	{
@@ -46,19 +47,15 @@ bool	check_pipe_syntax(char *input, int i)
 			quote = 0;
 		if (quote == 0 && input[i] =='|')
 		{
-			if (input[i + 1] == '\0')
-				return (ft_putstr_fd(ERR_SYN, STDERR_FILENO), false);
 			j = i + 1;
-			while (input[j] == ' ')
-				j++;
-			if (input[j] == '|')
+			j = skip_space(input, j);
+			while (input[j] == '|' || input[j] == '\0')
 				return (ft_putstr_fd(ERR_SYN, STDERR_FILENO), false);
 		}
 		i++;
 	}
 	return (true);
 }
-
 
 int	check_quote_syntax(char *input, int i)
 {
@@ -69,21 +66,22 @@ int	check_quote_syntax(char *input, int i)
 			i++;
 			while (input[i] && input[i] != '\'')
 				i++;
-			if (input[i] == '\0')
+			if (!input[i])
 				return (ft_putstr_fd(OPEN_SNG_QUOTE, STDERR_FILENO), ERROR);
 		}
 		else if (input[i] == '\"')
 		{
 			i++;
-			while (input[i]  && input[i] != '\"')
+			while (input[i] && input[i] != '\"')
 				i++;
-			if (input[i] == '\0')
+			if (!input[i])
 				return (ft_putstr_fd(OPEN_DBL_QUOTE, STDERR_FILENO), ERROR);
 		}
 		i++;
 	}
 	return (i);
 }
+
 bool	check_redirection_syntax(char *input, int i, int j)
 {
 	

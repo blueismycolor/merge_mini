@@ -6,7 +6,7 @@
 /*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/26 14:39:16 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/26 18:30:49 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,50 @@ void	print_tab(char	**tab)
 // 	}
 // }
 
-static void	print_tokens(t_cmd *input)
+
+// static void	print_tokens(t_cmd *input)
+// {
+// 	int	i;
+// 	while(input)
+// 	{
+// 		i = 0;
+// 		printf("Token: ");
+// 		while (input->args[i])
+// 		{
+// 			printf("\033[32m[\033[0m%s\033[32m]\033[0m", input->args[i]);
+// 			i++;
+// 		}
+// 		// printf(", Type: %d, Quote: %d",input->type, input->quote);
+// 		if (input->has_redir == true)
+// 			printf(" | name of file : [%s], redirection type : %d", input->redir->filename, input->redir->type);
+// 		printf("\n");
+// 		input = input->next;
+// 	}
+// }
+
+static void print_redirections(t_redir *redir)
 {
-	int	i;
-	while(input)
+	while (redir)
+	{
+		printf(" | name of file : [%s], redirection type : %d", redir->filename, redir->type);
+		redir = redir->next;
+	}
+}
+
+static void print_tokens(t_cmd *input)
+{
+	int i;
+	while (input)
 	{
 		i = 0;
 		printf("Token: ");
-		while (input->args[i])
+		while (input->args && input->args[i])
 		{
 			printf("\033[32m[\033[0m%s\033[32m]\033[0m", input->args[i]);
 			i++;
 		}
-		// printf(", Type: %d, Quote: %d",input->type, input->quote);
-		if (input->has_redir == true)
-			printf(" | name of file : [%s], redirection type : %d", input->redir->filename, input->redir->type);
+		if (input->has_redir)
+			print_redirections(input->redir);
 		printf("\n");
 		input = input->next;
 	}

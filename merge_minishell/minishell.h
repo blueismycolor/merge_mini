@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:53:05 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/23 13:34:38 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/26 15:00:31 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ bool	check_redirection_syntax(char *input, int i, int j);
 bool	validate_input(char *input);
 int		process_input(char *input);
 
+//parsing0_2.c
+int		is_space(char c);
+int		skip_space(char *input, int i);
+
+
 //tokens_in_tabstr_part
 
 //get_nbr_token.c
@@ -163,7 +168,7 @@ int		parsing_env_var(char *str, char *result, int tmp);
 char	*get_special_env_value(char *str, int index, char **envp);
 char	*get_env_name(char *str, int index, char **envp);
 char	*set_env(char *str, char **envp);
-int	pass_single_quotes(char *str, int i);
+int		pass_single_quotes(char *str, int i);
 
 //create_list_tcmd.c
 t_cmd	*tcmd_init(char *input, char **envp);

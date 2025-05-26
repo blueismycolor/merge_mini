@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:57:55 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/23 10:43:02 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/26 15:00:02 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_space(char c)
-{
-	return ( c == ' ' || (c >= 9 && c <= 13));
-}
-
-int	skip_space(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i] && is_space(input[i]))
-		i++;
-	return(i);
-}
 
 t_token	*create_token(t_token **head, char *str, t_type type, t_quote quote)
 {
