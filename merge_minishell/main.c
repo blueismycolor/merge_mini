@@ -6,7 +6,7 @@
 /*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/27 13:55:56 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/27 14:11:07 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,11 @@ int	main(int argc, char **argv, char **envp)
 		
 		input = NULL;
 		input = readline("\033[1;92m╰─➤ \033[0m");
-		input = set_env(input, envp);
 		if (input && input[0] != '\0')
 		{
 			if (process_input(input) == ERROR)
 				continue;
+			input = set_env(input, envp);
 		}
 		else
 		{
