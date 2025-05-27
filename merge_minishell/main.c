@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/26 18:30:49 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:55:56 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static void print_tokens(t_cmd *input)
 	}
 }
 
-int	main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_token		*arg_tokens;
@@ -146,13 +146,19 @@ int	main(int argc, char **argv, char **env)
 		
 		input = NULL;
 		input = readline("\033[1;92m╰─➤ \033[0m");
+		input = set_env(input, envp);
 		if (input && input[0] != '\0')
 		{
 			if (process_input(input) == ERROR)
 				continue;
 		}
+		else
+		{
+			free(input);
+			continue;
+		}
 		arg_tokens = get_token(input);
-		result = create_list_tcmd(arg_tokens, env);
+		result = create_list_tcmd(arg_tokens);
 		free_list(arg_tokens);
 		print_tokens(result);
 		free_tcmd(result);
@@ -161,4 +167,10 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
+/*
 
+	CAS PARTICULIER A SURVEILLER :
+	- ls > outfile > file -> deux redirections a mettre dans la liste chainee
+	- ls > outfile -al -> effectue ls -al > outfile : Pourquoi ? jsp
+
+*/

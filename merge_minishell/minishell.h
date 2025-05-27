@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:53:05 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/26 15:00:31 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/27 12:46:58 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void		free_list(t_token *head);
 int		count_args(char *str);
 char	*get_word(int i, int end, char *str);
 char	**ft_getargs(char *str, char **result);
-char	**set_args(char *str, char **envp);
+char	**set_args(char *str);
 char	*ft_remove_quotes(char *str);
 
 //expansion
@@ -169,15 +169,16 @@ char	*get_special_env_value(char *str, int index, char **envp);
 char	*get_env_name(char *str, int index, char **envp);
 char	*set_env(char *str, char **envp);
 int		pass_single_quotes(char *str, int i);
+char	*put_env(char *str, char **envp);
 
 //create_list_tcmd.c
-t_cmd	*tcmd_init(char *input, char **envp);
+t_cmd	*tcmd_init(char *input);
 t_cmd	*init_cmd_node(t_cmd **cmd_list, t_cmd **current);
 char	**realloc_args(char **args, int size);
-void	add_arg(t_cmd *cmd, char *str, char **envp);
+void	add_arg(t_cmd *cmd, char *str);
 void	add_redir(t_cmd *cmd, char *filename, t_type type);
-void	fill_cmd_from_tokens(t_cmd *cmd, t_token **token, char **envp);
-t_cmd	*create_list_tcmd(t_token *token, char **env);
+void	fill_cmd_from_tokens(t_cmd *cmd, t_token **token);
+t_cmd	*create_list_tcmd(t_token *token);
 void	free_tcmd(t_cmd *list);
 
 

@@ -6,7 +6,7 @@
 /*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:12:17 by egatien           #+#    #+#             */
-/*   Updated: 2025/05/26 14:16:43 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/27 13:54:14 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*get_result(char * name_of_env, char * first_part, char *second_part)
 		result = ft_strjoin(first_part, second_part);
 		free(first_part);
 		free(second_part);
+		free(name_of_env);
 		return (result);
 	}
 }
@@ -115,7 +116,7 @@ char	*put_env(char *str, char **envp)
 
 	i = 0;
 	result = str;
-	while (result[i] != '\0')
+	while (result && result[i] != '\0')
 	{
 		if (result[i] == '$' && result[i + 1])
 		{
@@ -123,11 +124,15 @@ char	*put_env(char *str, char **envp)
 			name_of_env = get_env_name(result, i, envp);
 			result = place_env_in_str(result, i, name_of_env);
 			free(tmp);
+			// tmp = result;
 			result = put_env(result, envp);
 			i = 0;
 		}
+		if (result[i] == '\0')
+			break;
 		i++;
 	}
+	// free(tmp);
 	return (result);
 }
 
@@ -143,14 +148,14 @@ char	*set_env(char *str, char **envp)
 	free(str);
 	while (result[i] != '\0' && result[i] != '$')
 	{
-		if (result[i] == '"')
+		if (result[i] == '\'')
 		{
 			if (quotes == false)
 				quotes = true;
 			else
 				quotes = false;
 		}
-		if (quotes == false)
+		if (quotes == true)
 			i = pass_single_quotes(result, i);
 		i++;
 	}
@@ -158,3 +163,4 @@ char	*set_env(char *str, char **envp)
 		return (result);
 	return (put_env(result, envp));
 }
+

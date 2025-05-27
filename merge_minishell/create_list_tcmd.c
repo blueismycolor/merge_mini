@@ -19,7 +19,7 @@
 		redir : none
 
 */
-t_cmd	*tcmd_init(char *input, char **envp)
+t_cmd	*tcmd_init(char *input)
 {
 	t_token *arg_tokens;
 	t_cmd *result;
@@ -31,7 +31,7 @@ t_cmd	*tcmd_init(char *input, char **envp)
 		return (NULL);
 	// quote_removal(arg_tokens); TODO
 	// expansion(arg_tokens); TODO
-	result = create_list_tcmd(arg_tokens, envp);
+	result = create_list_tcmd(arg_tokens);
 	return (result);
 }
 
@@ -81,9 +81,9 @@ char **realloc_args(char **args, int size)
 	return (new_args);
 }
 
-void add_arg(t_cmd *cmd, char *str, char **envp)
+void add_arg(t_cmd *cmd, char *str)
 {
-	cmd->args = set_args(str, envp);
+	cmd->args = set_args(str);
 	if (!cmd->args)
 		return;
 	if (!cmd->cmd)
@@ -113,12 +113,12 @@ void add_redir(t_cmd *cmd, char *filename, t_type type)
 	cmd->has_redir = true;
 }
 
-void fill_cmd_from_tokens(t_cmd *cmd, t_token **token, char **envp)
+void fill_cmd_from_tokens(t_cmd *cmd, t_token **token)
 {
 	while (*token && (*token)->type != PIPE)
 	{
 		if ((*token)->type == CMD)
-			add_arg(cmd, (*token)->str, envp);
+			add_arg(cmd, (*token)->str);
 		else if ((*token)->type == INPUT || (*token)->type == HEREDOC || (*token)->type == TRUNC
 				|| (*token)->type == APPEND)
 		{
@@ -132,7 +132,7 @@ void fill_cmd_from_tokens(t_cmd *cmd, t_token **token, char **envp)
 	}
 }
 
-t_cmd *create_list_tcmd(t_token *tokens, char **envp)
+t_cmd *create_list_tcmd(t_token *tokens)
 {
 	t_cmd *head;
 	t_cmd *last;
@@ -145,7 +145,7 @@ t_cmd *create_list_tcmd(t_token *tokens, char **envp)
 		new_cmd = init_cmd_node(&head, &last);
 		if (!new_cmd)
 			return (NULL);
-		fill_cmd_from_tokens(new_cmd, &tokens, envp);
+		fill_cmd_from_tokens(new_cmd, &tokens);
 		if (tokens && tokens->type == PIPE)
 			tokens = tokens->next;
 	}
