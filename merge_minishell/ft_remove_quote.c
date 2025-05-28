@@ -34,7 +34,7 @@ int	pass_single_quotes(char *str, int i)
 	}
 	return (i);
 }
-static t_quote	quotes_state_to_remove(char c, t_quote in_quotes)
+static	t_quote	quotes_state_to_remove(char c, t_quote in_quotes)
 {
 	if (c == '"')
 	{

@@ -2,19 +2,21 @@ NAME		= minishell
 
 RM			= rm -f
 SRCS_MAIN	= main.c
-SRCS		= create_list_tcmd.c \
-			expansion.c \
-			ft_remove_quote.c \
-			get_args.c \
-			get_nbr_token.c \
-			get_token_tabstr.c \
-			get_token_utils.c \
-			parsing0_0.c \
-			parsing0_1.c \
-			parsing0_2.c \
-			token_utils.c \
-			free_struct.c \
-			expansion_utils.c
+
+SRCS		= create_list_tcmd0.c \
+		create_list_tcmd1.c \
+		expansion0.c \
+		expansion1.c \
+		expansion2.c \
+		free_struct.c \
+		ft_remove_quote.c \
+		get_args.c \
+		get_nbr_token.c \
+		get_token_tabstr.c \
+		get_token_utils0.c \
+		get_token_utils1.c \
+		parsing0.c \
+		parsing1.c
 
 LIBFT_DIR	= libft-complete
 LIBFT		= $(LIBFT_DIR)/libft-complete.a

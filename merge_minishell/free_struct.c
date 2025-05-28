@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/23 10:42:27 by egatien           #+#    #+#             */
-/*   Updated: 2025/05/27 14:16:00 by egatien          ###   ########.fr       */
+/*   Created: 2025/05/28 16:21:09 by aeudes            #+#    #+#             */
+/*   Updated: 2025/05/28 16:21:25 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,4 @@ void	free_tcmd(t_cmd *list)
 		free(temp);
 	}
 }
+

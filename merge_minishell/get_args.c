@@ -1,14 +1,16 @@
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_args.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 16:24:27 by aeudes            #+#    #+#             */
+/*   Updated: 2025/05/28 16:24:46 by aeudes           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
-
-// int	count_for_quotes(int i, char *str, int *count)
-// {
-
-// 	return (i);
-// }
 
 int	count_args(char *str)
 {
@@ -99,9 +101,8 @@ char	**set_args(char *str)
 	}
 	return (result);
 }
+
 // en gros il va falloir tout decouper. Les quotes en gros se suppriment faut les enlever.
-
-
 /*
 
 EN GROS : 
