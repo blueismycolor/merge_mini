@@ -78,6 +78,7 @@ static char	*str_without_quotes(char *str, int count)
 		index_result ++;
 	}
 	result[index_result] = '\0';
+	free(str);
 	return (result);
 }
 
@@ -86,15 +87,15 @@ char	*ft_remove_quotes(char *str)
 	t_quote	in_quotes;
 	int		count;
 	int		i;
+	t_quote	prev_state;
 
 	count = 0;
 	i = 0;
 	in_quotes = NONE;
 	while (str[i] != '\0')
 	{
-		t_quote prev_state = in_quotes;
+		prev_state = in_quotes;
 		in_quotes = quotes_state_to_remove(str[i], in_quotes);
-		
 		if ((str[i] == '"' && (prev_state == NONE || prev_state == DOUBLE)) ||
 			(str[i] == '\'' && (prev_state == NONE || prev_state == SINGLE)))
 		{
