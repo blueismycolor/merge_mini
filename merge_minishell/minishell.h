@@ -6,7 +6,7 @@
 /*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:53:05 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/27 12:46:58 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/27 15:34:52 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void	free_tcmd(t_cmd *list);
 
 
 //main.c
+bool	check_quotes_state(char c, bool singlequotes);
 bool	check_for_expansion(char *str);
 t_token	*get_token(char *str);
 void	print_tab(char	**tab);
