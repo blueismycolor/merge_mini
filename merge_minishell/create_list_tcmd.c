@@ -132,6 +132,58 @@ void fill_cmd_from_tokens(t_cmd *cmd, t_token **token)
 	}
 }
 
+char	**remove_filename(char **args)
+{
+	char	**tab;
+	int		i;
+	int		index;
+
+	i = 0;
+	index = 1;
+	while (args[i])
+		i++;
+	tab = malloc(sizeof(char *) * i);
+	i = 0;
+	while (args[index])
+	{
+		tab[i] = ft_strdup(args[index]);
+		i++;
+		index++;
+	}
+	free_tab(args);
+	tab[i] = NULL;
+	return (tab);
+}
+
+t_cmd	*fill_special_cmd(t_token **tokens, t_cmd **head, t_cmd **last, t_cmd **new_cmd)
+{
+	char	**args;
+
+	args = set_args((*tokens)->next->str);
+	(*new_cmd) = init_cmd_node(head, last);
+	if (!(*new_cmd))
+		return (NULL);
+	add_redir((*new_cmd), args[0], (*tokens)->type);
+	*tokens = (*tokens)->next->next;
+	(*new_cmd)->args = remove_filename(args);
+	while ((*tokens) && (*tokens)->type != PIPE)
+	{
+		if ((*tokens)->type == INPUT || (*tokens)->type == HEREDOC 
+			|| (*tokens)->type == TRUNC || (*tokens)->type == APPEND)
+		{
+			if ((*tokens)->next)
+			{
+				add_redir((*new_cmd), (*tokens)->next->str, (*tokens)->type);
+				*tokens = (*tokens)->next;
+			}
+		}
+		*tokens = (*tokens)->next;
+	}
+	if (*tokens)
+		*tokens = (*tokens)->next;
+	return ((*new_cmd));
+}
+
 t_cmd *create_list_tcmd(t_token *tokens)
 {
 	t_cmd *head;
@@ -140,6 +192,13 @@ t_cmd *create_list_tcmd(t_token *tokens)
 
 	head = NULL;
 	last = NULL;
+	new_cmd = NULL;
+	if (tokens->type == INPUT || tokens->type == HEREDOC || tokens->type == TRUNC 
+		|| tokens->type == APPEND)
+		{
+			fill_special_cmd(&tokens, &head, &last, &new_cmd);
+			new_cmd = new_cmd->next;
+		}
 	while (tokens)
 	{
 		new_cmd = init_cmd_node(&head, &last);
@@ -151,3 +210,13 @@ t_cmd *create_list_tcmd(t_token *tokens)
 	}
 	return (head);
 }
+/*
+
+	checker le type du premier element de t_token :
+	- si c'est une redirection = 
+		-> on fait un set_arg du deuxieme element de la liste t_token
+		-> set_arg[0] sera le nom du fichier (donc t_cmd.redir.filename) 
+			-> donc les autres elements apres set_arg[0] sont mis dans t_cmd.args
+			! si il y'a d'autres redirections on les met a la suite dans t_redir
+
+*/

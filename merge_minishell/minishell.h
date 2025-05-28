@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:53:05 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/27 15:34:52 by egatien          ###   ########.fr       */
+/*   Updated: 2025/05/28 14:43:57 by aeudes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_redir
 	struct s_redir	*next; 
 }	t_redir;
 
-typedef struct s_cmd
+typedef struct s_cmd // t_cmd.args peut etre vide : exemple : "< outfile"
 {
 	char			*cmd;
 	bool			is_builtin;
@@ -187,6 +187,7 @@ bool	check_quotes_state(char c, bool singlequotes);
 bool	check_for_expansion(char *str);
 t_token	*get_token(char *str);
 void	print_tab(char	**tab);
+void	free_tab(char **tab);
 
 
 
