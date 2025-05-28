@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:52:50 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:23:58 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:47:30 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_tab(char	**tab)
 	}
 }
 
-static void print_redirections(t_redir *redir)
+static void	print_redirections(t_redir *redir)
 {
 	while (redir)
 	{
@@ -36,9 +36,10 @@ static void print_redirections(t_redir *redir)
 	}
 }
 
-static void print_tokens(t_cmd *input)
+static void	print_tokens(t_cmd *input)
 {
-	int i;
+	int	i;
+
 	while (input)
 	{
 		i = 0;

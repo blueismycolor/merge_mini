@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_remove_quote.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 17:30:11 by egatien           #+#    #+#             */
+/*   Updated: 2025/05/28 17:31:09 by egatien          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -34,7 +44,8 @@ int	pass_single_quotes(char *str, int i)
 	}
 	return (i);
 }
-static	t_quote	quotes_state_to_remove(char c, t_quote in_quotes)
+
+static t_quote	quotes_state_to_remove(char c, t_quote in_quotes)
 {
 	if (c == '"')
 	{
@@ -96,15 +107,13 @@ char	*ft_remove_quotes(char *str)
 	{
 		prev_state = in_quotes;
 		in_quotes = quotes_state_to_remove(str[i], in_quotes);
-		if ((str[i] == '"' && (prev_state == NONE || prev_state == DOUBLE)) ||
-			(str[i] == '\'' && (prev_state == NONE || prev_state == SINGLE)))
+		if ((str[i] == '"' && (prev_state == NONE || prev_state == DOUBLE))
+			|| (str[i] == '\'' && (prev_state == NONE || prev_state == SINGLE)))
 		{
-			// c'est une quote d'ouverture ou fermeture, ne rien faire
 		}
 		else
 			count++;
 		i++;
 	}
 	return (str_without_quotes(str, count));
-
 }

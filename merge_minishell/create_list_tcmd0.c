@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_list_tcmd0.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:08:52 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:08:56 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:43:55 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 t_cmd	*tcmd_init(char *input)
 {
-	t_token *arg_tokens;
-	t_cmd *result;
+	t_token	*arg_tokens;
+	t_cmd	*result;
 
 	if (!input || process_input(input) == -1)
 		return (NULL);
 	arg_tokens = get_token(input);
 	if (!arg_tokens)
 		return (NULL);
-	// quote_removal(arg_tokens); TODO
-	// expansion(arg_tokens); TODO
 	result = create_list_tcmd(arg_tokens);
 	return (result);
 }
 
 t_cmd	*init_cmd_node(t_cmd **cmd_list, t_cmd **current)
 {
-	t_cmd *new;
+	t_cmd	*new;
 
 	new = malloc(sizeof(t_cmd));
 	if (!new)
@@ -55,10 +53,10 @@ t_cmd	*init_cmd_node(t_cmd **cmd_list, t_cmd **current)
 	return (new);
 }
 
-char **realloc_args(char **args, int size)
+char	**realloc_args(char **args, int size)
 {
-	char **new_args;
-	int i;
+	char	**new_args;
+	int		i;
 
 	i = 0;
 	new_args = malloc(sizeof(char *) * (size + 2));
@@ -74,23 +72,23 @@ char **realloc_args(char **args, int size)
 	return (new_args);
 }
 
-void add_arg(t_cmd *cmd, char *str)
+void	add_arg(t_cmd *cmd, char *str)
 {
 	cmd->args = set_args(str);
 	if (!cmd->args)
-		return;
+		return ;
 	if (!cmd->cmd)
 		cmd->cmd = cmd->args[0];
 }
 
-void add_redir(t_cmd *cmd, char *filename, t_type type)
+void	add_redir(t_cmd *cmd, char *filename, t_type type)
 {
-	t_redir *new;
-	t_redir *tmp;
+	t_redir	*new;
+	t_redir	*tmp;
 
 	new = malloc(sizeof(t_redir));
 	if (!new)
-		return;
+		return ;
 	new->filename = ft_strdup(filename);
 	new->type = type;
 	new->next = NULL;
@@ -105,4 +103,3 @@ void add_redir(t_cmd *cmd, char *filename, t_type type)
 	}
 	cmd->has_redir = true;
 }
-

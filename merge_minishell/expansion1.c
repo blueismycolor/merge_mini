@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:18:19 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:32:11 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:28:07 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ char	*get_env_name(char *str, int index, char **envp)
 	return (result);
 }
 
-
 int	get_end_of_second_part(char *str, int index)
 {
 	if (ft_isdigit(str[index + 1]))
@@ -94,11 +93,10 @@ int	get_end_of_second_part(char *str, int index)
 		return (index + 1);
 	}
 	index++;
-	while (ft_isalpha(str[index]) || str[index] == '_' || ft_isdigit(str[index]))
-	{
+	while (ft_isalpha(str[index])
+		|| str[index] == '_' || ft_isdigit(str[index]))
 		index++;
-	}
-	return (index); 
+	return (index);
 }
 
 char	*put_third_part(int i, char *str)
@@ -106,9 +104,10 @@ char	*put_third_part(int i, char *str)
 	int		count;
 	int		tmp;
 	char	*result;
+
 	tmp = i;
 	count = 0;
-	while(str[tmp] != '\0')
+	while (str[tmp] != '\0')
 	{
 		tmp++;
 		count++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:24:27 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:24:46 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:32:16 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	count_args(char *str)
 		}
 		i = pass_quotes(i, str);
 		if (str[i] == '\0')
-			break;
+			break ;
 		i++;
 	}
 	count++;
@@ -101,21 +101,3 @@ char	**set_args(char *str)
 	}
 	return (result);
 }
-
-// en gros il va falloir tout decouper. Les quotes en gros se suppriment faut les enlever.
-/*
-
-EN GROS : 
-
-	TANT QU'IL N'Y A PAS D'ESPACES LE QUOTE EST TOUJOURS VALIDE.
-	LISTE D'EXEMPLE : 
-	- ls -al = 2 token : "ls", "-al"
-	- ls' -al' = 1 token : "ls -al"
-
-	EN GROS TU CREER UN SPLIT QUI VA RECUPERER TOUT AVEC LES QUOTES
-	-> ENSUITE ON RETIRE LES QUOTES. COMMENT ?? FACILE !!! 
-		-> STRJOIN DES DEUX CHAINES AVANT ET APRES LE PREMIER QUOTE. ET POUR LE DEUXIEME ??
-			-> ON FAIT PAREIL.
-
-*/
-

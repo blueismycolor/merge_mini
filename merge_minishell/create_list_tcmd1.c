@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_list_tcmd1.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:07:19 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:10:23 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:46:32 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,15 @@ char	**remove_filename(char **args)
 	return (tab);
 }
 
-void fill_cmd_from_tokens(t_cmd *cmd, t_token **token)
+void	fill_cmd_from_tokens(t_cmd *cmd, t_token **token)
 {
 	while (*token && (*token)->type != PIPE)
 	{
 		if ((*token)->type == CMD)
 			add_arg(cmd, (*token)->str);
-		else if ((*token)->type == INPUT || (*token)->type == HEREDOC || (*token)->type == TRUNC
-				|| (*token)->type == APPEND)
+		else if ((*token)->type == INPUT
+			|| (*token)->type == HEREDOC || (*token)->type == TRUNC
+			|| (*token)->type == APPEND)
 		{
 			if ((*token)->next)
 			{
@@ -54,7 +55,8 @@ void fill_cmd_from_tokens(t_cmd *cmd, t_token **token)
 	}
 }
 
-t_cmd	*fill_special_cmd(t_token **tokens, t_cmd **head, t_cmd **last, t_cmd **new_cmd)
+t_cmd	*fill_special_cmd(t_token **tokens,
+	t_cmd **head, t_cmd **last, t_cmd **new_cmd)
 {
 	char	**args;
 
@@ -67,7 +69,7 @@ t_cmd	*fill_special_cmd(t_token **tokens, t_cmd **head, t_cmd **last, t_cmd **ne
 	(*new_cmd)->args = remove_filename(args);
 	while ((*tokens) && (*tokens)->type != PIPE)
 	{
-		if ((*tokens)->type == INPUT || (*tokens)->type == HEREDOC 
+		if ((*tokens)->type == INPUT || (*tokens)->type == HEREDOC
 			|| (*tokens)->type == TRUNC || (*tokens)->type == APPEND)
 		{
 			if ((*tokens)->next)
@@ -83,21 +85,21 @@ t_cmd	*fill_special_cmd(t_token **tokens, t_cmd **head, t_cmd **last, t_cmd **ne
 	return ((*new_cmd));
 }
 
-t_cmd *create_list_tcmd(t_token *tokens)
+t_cmd	*create_list_tcmd(t_token *tokens)
 {
-	t_cmd *head;
-	t_cmd *last;
-	t_cmd *new_cmd;
+	t_cmd	*head;
+	t_cmd	*last;
+	t_cmd	*new_cmd;
 
 	head = NULL;
 	last = NULL;
 	new_cmd = NULL;
-	if (tokens->type == INPUT || tokens->type == HEREDOC || tokens->type == TRUNC 
-		|| tokens->type == APPEND)
-		{
-			fill_special_cmd(&tokens, &head, &last, &new_cmd);
-			new_cmd = new_cmd->next;
-		}
+	if (tokens->type == INPUT || tokens->type == HEREDOC
+		|| tokens->type == TRUNC || tokens->type == APPEND)
+	{
+		fill_special_cmd(&tokens, &head, &last, &new_cmd);
+		new_cmd = new_cmd->next;
+	}
 	while (tokens)
 	{
 		new_cmd = init_cmd_node(&head, &last);

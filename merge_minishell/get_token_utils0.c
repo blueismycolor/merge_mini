@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_token_utils0_0.c                               :+:      :+:    :+:   */
+/*   get_token_utils0.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:24:59 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:25:02 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:37:12 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	pass_quotes(int i, char *str)
 {
 	if (str[i] == '"')
 	{
-		// printf("character avant le quotes : %c\n", str[i - 1]);
 		i++;
 		if (str[i] == '\0')
 			return (i);

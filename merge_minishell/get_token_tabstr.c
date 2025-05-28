@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_token_tabstr.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/28 17:35:29 by egatien           #+#    #+#             */
+/*   Updated: 2025/05/28 17:36:42 by egatien          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -48,50 +59,52 @@ int	get_second_tokens(char *str, char **result, int *j, int end)
 
 char	**put_token_in_tabstr(char *str)
 {
-	char	**result; // le tableau de chaine qu'on renvoit 
-	int		i; // parcourt la chaine de caracteres
-	int		j; // parcourt le tableau de chaine
-	int		end; //parcourt la chaine jusqu'a la fin d'un token (donc un pipe ou une redirection)
+	char	**result;
+	int		i;
+	int		j;
+	int		end;
 	bool	command;
 
-	result = setup_variables(&command, &j, &i, str); // initialise et malloc les variables
+	result = setup_variables(&command, &j, &i, str);
 	if (!result)
 		return (NULL);
 	while (str[i] != '\0')
 	{
-		while (str[i] == SPACE) //on passe les espaces si il y en a dans la chaine (exemple : "     ls    |  grep")
+		while (str[i] == SPACE)
 			i++;
-		end = get_end_of_token(i, str, &command); // on cherche la fin du token actuelle dans la chaine. command devient faux si le premier token est un '|' ou '>', '<'
-		if (command == true) // donc si command = true c'est qu'il y a une commande en premier token et non un pipe etc
+		end = get_end_of_token(i, str, &command);
+		if (command == true)
 		{
-			result[j] = get_str_token(str, i, end); //fonction qui recupere le token de commande et le met dans result[j] notre tableau de chaine
+			result[j] = get_str_token(str, i, end);
 			j++;
 		}
-		if (!get_second_tokens(str, result, &j, end)) // get_second_tokens va recuperer le token qui est soit un pipe ou une redirection. Si tout les tokens ont ete places on renvoie 0 donc on sort de la boucle
+		if (!get_second_tokens(str, result, &j, end))
 			break ;
-		i = check_redirections(str, end); // change la valeur de 'i' par rapport a 'end'.
+		i = check_redirections(str, end);
 	}
 	return (result);
 }
 
 t_token	*get_token(char *str)
 {
-	t_token	*head; // tete de la liste au'on va renvoyer
-	t_token	*node; // t_token temporaire qui sert a initialiser les noeuds de la liste
-	char	**cut_str; // tableau de chaine de caracteres qui sert a recuperer les tokens dans str
-	int		i; // variable pour defiler dans cut_str
+	t_token	*head;
+	t_token	*node;
+	char	**cut_str;
+	int		i;
 
 	i = 0;
 	head = NULL;
-	cut_str = put_token_in_tabstr(str); // on recupere les tokens et on les place dans le tableau
-	head = create_token(&head, cut_str[i], get_token_type(cut_str[i]), get_quote_type(cut_str[i])); // on cree le premier noeud de la liste
-	head->has_expansion = check_for_expansion(head->str); // on regarde si le token contient une expansion
+	cut_str = put_token_in_tabstr(str);
+	head = create_token(&head, cut_str[i],
+			get_token_type(cut_str[i]), get_quote_type(cut_str[i]));
+	head->has_expansion = check_for_expansion(head->str);
 	node = head->next;
 	free(cut_str[i]);
 	i++;
-	while (cut_str[i]) //boucle qui va creer la liste chainee
+	while (cut_str[i])
 	{
-		node = create_token(&head, cut_str[i], get_token_type(cut_str[i]), get_quote_type(cut_str[i]));
+		node = create_token(&head, cut_str[i],
+				get_token_type(cut_str[i]), get_quote_type(cut_str[i]));
 		node->has_expansion = check_for_expansion(node->str);
 		node = node->next;
 		free(cut_str[i]);
@@ -100,4 +113,3 @@ t_token	*get_token(char *str)
 	free(cut_str);
 	return (head);
 }
-

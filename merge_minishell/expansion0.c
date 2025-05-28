@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion0_0.c                                     :+:      :+:    :+:   */
+/*   expansion0.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:12:17 by egatien           #+#    #+#             */
-/*   Updated: 2025/05/28 16:18:05 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:26:25 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	last_exit_status(int exit_status)
 	return (status_to_return);
 }
 
-
 char	*search_env(char *env_name, char **envp)
 {
 	int		index;
@@ -73,7 +72,6 @@ char	*search_env(char *env_name, char **envp)
 		return (NULL);
 	return (str);
 }
-
 
 char	*get_env_value(char *str, int index, char **envp)
 {
@@ -104,11 +102,9 @@ char	*get_env_value(char *str, int index, char **envp)
 	return (search_env(result, envp));
 }
 
-
 int	ft_isspecial(char c)
 {
 	if (!ft_isdigit(c) && !ft_isalpha(c) && c != '_')
 		return (1);
 	return (0);
 }
-

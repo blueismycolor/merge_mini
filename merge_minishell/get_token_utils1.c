@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_token_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 11:57:55 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 17:05:22 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:37:24 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool	check_for_expansion(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		if (str[i] == '$')
 			return (true);

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   expansion2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeudes <aeudes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egatien <egatien@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 16:18:57 by aeudes            #+#    #+#             */
-/*   Updated: 2025/05/28 16:33:44 by aeudes           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:29:29 by egatien          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_result(char * name_of_env, char * first_part, char *second_part)
+char	*get_result(char *name_of_env, char *first_part, char *second_part)
 {
 	char	*tmp;
 	char	*result;
 
 	if (name_of_env)
 	{
-	result = ft_strjoin(first_part, name_of_env);
-	tmp = result;
-	result = ft_strjoin(result, second_part);
-	free(tmp);
-	free(first_part);
-	free(name_of_env);
-	free(second_part);
-	return (result);
+		result = ft_strjoin(first_part, name_of_env);
+		tmp = result;
+		result = ft_strjoin(result, second_part);
+		free(tmp);
+		free(first_part);
+		free(name_of_env);
+		free(second_part);
+		return (result);
 	}
 	else
 	{
@@ -56,7 +56,6 @@ char	*place_env_in_str(char *str, int index, char *name_of_env)
 	}
 	first_part[i] = '\0';
 	i = get_end_of_second_part(str, index);
-
 	second_part = put_third_part(i, str);
 	result = get_result(name_of_env, first_part, second_part);
 	return (result);
@@ -79,15 +78,13 @@ char	*put_env(char *str, char **envp)
 			name_of_env = get_env_name(result, i, envp);
 			result = place_env_in_str(result, i, name_of_env);
 			free(tmp);
-			// tmp = result;
 			result = put_env(result, envp);
 			i = 0;
 		}
 		if (result[i] == '\0')
-			break;
+			break ;
 		i++;
 	}
-	// free(tmp);
 	return (result);
 }
 
@@ -112,4 +109,3 @@ char	*set_env(char *str, char **envp)
 		return (result);
 	return (put_env(result, envp));
 }
-
